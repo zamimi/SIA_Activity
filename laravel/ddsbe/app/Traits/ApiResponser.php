@@ -4,7 +4,7 @@ namespace App\Traits;
 
 use Illuminate\Http\Response;
 
-trait ApiReponser {
+trait ApiResponser {
     public function successResponse($data, $code = Respnse::HTTP_OK) {
         return response()->json(['data' => $data], $code);
     }
