@@ -3,7 +3,7 @@
     namespace App\Http\Controllers;
 
     use Illuminate\Http\Request;
-    // use Illuminate\Http\Response;
+    use Illuminate\Http\Response;
     use App\Models\User;
     use App\Traits\ApiResponser;
     use DB;
@@ -28,4 +28,18 @@
             $users = User::all();
             return $this->successResponse($users);
         }
+
+        public function add(Request $request){
+            $rules = [
+                'username' => 'required|max:20',
+                'password' => 'required|max:20',
+                'updated_at' => 'required',
+                'created_at' => 'required'
+            ];
+
+            $this->validate($request, $rules);
+            $user = User::create($request->all());
+            return $this->successResponse($user, Response::HTTP_CREATED);
+        }
+
     }
