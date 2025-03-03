@@ -7,6 +7,9 @@
         
         // column sa table
         protected $fillable = [
-            'username', 'password'
+            'username', 'passwords'
         ];
+
+        // public $timestamps = false;
+        protected $primaryKey = 'userid';
     }
