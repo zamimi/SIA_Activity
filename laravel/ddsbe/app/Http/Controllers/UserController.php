@@ -10,6 +10,7 @@
 
     Class UserController extends Controller {
         use ApiResponser;
+
         private $request;
         public function __construct(Request $request){
             $this->request = $request;
@@ -32,14 +33,49 @@
         public function add(Request $request){
             $rules = [
                 'username' => 'required|max:20',
-                'password' => 'required|max:20',
-                'updated_at' => 'required',
-                'created_at' => 'required'
+                'passwords' => 'required|max:20',
             ];
 
             $this->validate($request, $rules);
             $user = User::create($request->all());
             return $this->successResponse($user, Response::HTTP_CREATED);
+        }
+
+        public function show($id){
+            // $user = User::findOrFail($id);
+            $user = User::where('userid', $id)->first();
+            if($user){
+                return $this->successResponse($user);
+            }
+            {
+                return $this->errorResponse('User ID does not exist', Response::HTTP_NOT_FOUND);
+            }
+            }
+        
+        public function update(Request $request,$id) {
+            $rules = [
+                'username' => 'max:20',
+                'passwords' => 'max:20',
+            ];
+
+            $this->validate($request, $rules);
+            $user = User::findOrFail($id);
+            $user->fill($request->all());
+            
+            // if no changes happen
+            if ($user->isClean()) {
+                return $this->errorResponse('At least one value must change', Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
+
+            $user->save();
+            return $this->successResponse($user);
+        }
+        
+        public function delete($id){
+            $user = User::findOrFail($id);
+            $user->delete();
+
+            return $this->successResponse('Successfully deleted');
         }
 
     }
