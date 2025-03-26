@@ -42,15 +42,18 @@
         }
 
         public function show($id){
-            // $user = User::findOrFail($id);
+            $user = User::findOrFail($id);
+            return $this->successResponse($user);
+
+            /* old code pf show; contains error response
             $user = User::where('userid', $id)->first();
             if($user){
                 return $this->successResponse($user);
             }
             {
                 return $this->errorResponse('User ID does not exist', Response::HTTP_NOT_FOUND);
-            }
-            }
+            }*/
+        }
         
         public function update(Request $request,$id) {
             $rules = [
@@ -72,10 +75,20 @@
         }
         
         public function delete($id){
+            /* old code of delete; contains error response only
             $user = User::findOrFail($id);
             $user->delete();
+            return $this->errorResponse('User ID does not exist', Response::HTTP_NOT_FOUND);
+            */
 
-            return $this->successResponse('Successfully deleted');
+            $user = User::where('userid', $id)->first();
+            if($user){
+                $user->delete();
+                return $this->successResponse('Succesfully deleted', Response::HTTP_OK);
+            }
+            {
+                return $this->errorResponse('User ID Does Not Exists', Response::HTTP_NOT_FOUND);
+            }
         }
 
     }
