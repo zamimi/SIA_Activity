@@ -8,7 +8,7 @@
     use App\Traits\ApiResponser;
     use DB;
 
-    Class UserController extends Controller {
+    Class User1Controller extends Controller {
         use ApiResponser;
 
         private $request;
