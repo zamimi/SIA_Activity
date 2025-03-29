@@ -3,7 +3,8 @@
 namespace App\Services;
 use App\Traits\ConsumesExternalService;
 
-class User1Service{
+class User1Services
+{
 
     use ConsumesExternalService;
 
@@ -16,5 +17,14 @@ class User1Service{
     public function __construct() {
         $this->baseUri =
         config('services.users1.base_uri');
+    }
+
+    /**
+     * Obtain the full list of Users from User1 Site
+     * @return string
+     */
+
+    public function obtainUsers1() {
+        return $this->performRequest('GET','/users');
     }
 }

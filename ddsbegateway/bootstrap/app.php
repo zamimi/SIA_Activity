@@ -27,7 +27,7 @@ $app->withFacades();
 
 $app->withEloquent();
 
-$app->configure(‘services’);
+$app->configure('services');
 
 /*
 |--------------------------------------------------------------------------

@@ -8,7 +8,7 @@ class User2Service{
     use ConsumesExternalService;
 
     /**
-     * The base uri to consume the User1 Service
+     * The base uri to consume the User2 Service
      * @var string
      */
     public $baseUri;
