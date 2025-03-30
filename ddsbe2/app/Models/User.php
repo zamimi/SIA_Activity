@@ -7,7 +7,7 @@
         
         // column sa table
         protected $fillable = [
-            'username', 'passwords'
+            'username', 'passwords', 'jobid'
         ];
 
         // public $timestamps = false;
