@@ -3,8 +3,7 @@
 namespace App\Services;
 use App\Traits\ConsumesExternalService;
 
-class User1Services
-{
+class User1Services {
 
     use ConsumesExternalService;
 
@@ -15,8 +14,7 @@ class User1Services
     public $baseUri;
 
     public function __construct() {
-        $this->baseUri =
-        config('services.users1.base_uri');
+        $this->baseUri = config('service.users1.base_uri');
     }
 
     /**
@@ -26,5 +24,21 @@ class User1Services
 
     public function obtainUsers1() {
         return $this->performRequest('GET','/users');
+    }
+
+    public function createUser1($data) {
+        return $this->performRequest('POST', '/users', $data);
+    }
+
+    public function obtainUser1($id){
+        return $this->performRequest('GET', "/users/{$id}");
+    }
+
+    public function editUser1($data, $id) {
+    return $this->performRequest('PUT', "/users/{$id}", $data);
+    }
+
+    public function deleteUser1($id) {
+        return $this->performRequest('DELETE', "/users/{$id}");
     }
 }
