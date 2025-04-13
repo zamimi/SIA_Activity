@@ -12,9 +12,11 @@ class User1Services {
      * @var string
      */
     public $baseUri;
+    public $secret;
 
     public function __construct() {
-        $this->baseUri = config('service.users1.base_uri');
+        $this->baseUri = config('services.users1.base_uri');
+        $this->secret = config('services.users1.secret');
     }
 
     /**
